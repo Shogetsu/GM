@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ba4b91f6e74a04d9d9cbcbef8aa0bb, type: 3}
+  m_Name: PaperRefugeCraft
+  m_EditorClassIdentifier: 
+  name: PaperRefugeCraft
+  icon: {fileID: 21300000, guid: 961e95bae68c59a40ba9257f45d0b284, type: 3}
+  iconBlue: {fileID: 21300000, guid: a2966b922ed0da24fa6ab5f629074fd4, type: 3}
+  iconGreen: {fileID: 21300000, guid: a3dbb4a884751c04aa039be955186e9a, type: 3}
+  iconMagenta: {fileID: 21300000, guid: 0baa5877bb2d15843948afc07d92c2d6, type: 3}
+  iconRed: {fileID: 21300000, guid: f95787cd9d7f5254c89eb910d9e7de18, type: 3}
+  iconCyan: {fileID: 21300000, guid: f8f35d85543b2984991e4590e76c27e1, type: 3}
+  iconYellow: {fileID: 21300000, guid: 9f799b6d2816786438129c9030792c2b, type: 3}
+  color: 
+  material: Paper
+  quantityNeeded: 2
+  colorLevel: 50

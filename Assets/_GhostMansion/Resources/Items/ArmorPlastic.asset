@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09682a9f8889f3f46b2cd88aa7d9575b, type: 3}
+  m_Name: ArmorPlastic
+  m_EditorClassIdentifier: 
+  name: ArmorPlastic
+  icon: {fileID: 21300000, guid: d093cc714a522044baac433019c65524, type: 3}
+  iconBlue: {fileID: 21300000, guid: fd1e37aeb31ec194ba442ab04f54fc40, type: 3}
+  iconGreen: {fileID: 21300000, guid: ffedbfdfead869e4d8da21fc340ffc96, type: 3}
+  iconMagenta: {fileID: 21300000, guid: c0aa2539394e2bf4dae0285fc6697ba4, type: 3}
+  iconRed: {fileID: 21300000, guid: c1bc9dfd3b711c54296267cd3d9b1f9b, type: 3}
+  iconCyan: {fileID: 21300000, guid: 6318206806927714aa16585dea34f0d7, type: 3}
+  iconYellow: {fileID: 21300000, guid: 10f6c23669033534a897c87a021f7b2b, type: 3}
+  color: 
+  material: Plastic
+  quantityNeeded: 10
+  colorLevel: 125
+  def: 3

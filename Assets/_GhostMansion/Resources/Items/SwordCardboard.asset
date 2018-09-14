@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd88d7b68c69c8846b629e8f19144f70, type: 3}
+  m_Name: SwordCardboard
+  m_EditorClassIdentifier: 
+  name: SwordCardboard
+  icon: {fileID: 21300000, guid: aa8aa16c71d65964e8949d9051d6d568, type: 3}
+  iconBlue: {fileID: 21300000, guid: abc9a75f5820ad14a9830bc9593cbaf1, type: 3}
+  iconGreen: {fileID: 21300000, guid: 880e978a81cded54088f34ef73aeee99, type: 3}
+  iconMagenta: {fileID: 21300000, guid: 0732dbaec0f1b6648ab5b094e90327f6, type: 3}
+  iconRed: {fileID: 21300000, guid: 3b74e470add60be468ad0ba97aa4a786, type: 3}
+  iconCyan: {fileID: 21300000, guid: e9f4cc5b7223b154e81a5e2fc0f3166e, type: 3}
+  iconYellow: {fileID: 21300000, guid: 0b63992fe04078146857d154b645049e, type: 3}
+  color: 
+  material: Cardboard
+  quantityNeeded: 5
+  colorLevel: 70
+  Damage: 6
