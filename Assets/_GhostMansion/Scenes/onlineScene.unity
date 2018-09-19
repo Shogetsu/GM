@@ -900,7 +900,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.35
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -1708,7 +1708,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4485970536189902, guid: a85fbbb25040494439e51bc3da8fd36e, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 248.598
+      value: 248.454
       objectReference: {fileID: 0}
     - target: {fileID: 4485970536189902, guid: a85fbbb25040494439e51bc3da8fd36e, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1729,6 +1729,16 @@ Prefab:
     - target: {fileID: 4485970536189902, guid: a85fbbb25040494439e51bc3da8fd36e, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 108405140834000936, guid: a85fbbb25040494439e51bc3da8fd36e,
+        type: 2}
+      propertyPath: m_Intensity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 108405140834000936, guid: a85fbbb25040494439e51bc3da8fd36e,
+        type: 2}
+      propertyPath: m_Lightmapping
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a85fbbb25040494439e51bc3da8fd36e, type: 2}
