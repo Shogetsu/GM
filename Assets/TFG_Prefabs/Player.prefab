@@ -112,7 +112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1138552793817258
 GameObject:
   m_ObjectHideFlags: 1
@@ -1056,7 +1056,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229154644669544}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 150.723, y: 2.042025, z: 255.6428}
+  m_LocalPosition: {x: 150.97113, y: 2.5775905, z: 250.73326}
   m_LocalScale: {x: 0.36, y: 0.36, z: 0.36}
   m_Children:
   - {fileID: 4201133496045718}
@@ -2094,7 +2094,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 0.75470376, a: 1}
   m_Intensity: 5
   m_Range: 1.25
-  m_SpotAngle: 87.7
+  m_SpotAngle: 122.8
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -2596,7 +2596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 10
-  speed: 0.15
+  speed: 0.05
   jumpForce: 4
   controller: {fileID: 0}
   rb: {fileID: 54363991301086536}
