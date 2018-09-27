@@ -9,9 +9,12 @@ public class SetupLocalPlayer : NetworkBehaviour {
     public string pname = "player";
 
     [SyncVar]
-    public Color playerColor = Color.white;
+    public Color playerColor;
 
     public string colorString;
+
+   /* GameObject cam;
+    GameObject camGhost;*/
 
     private void OnGUI()
     {
@@ -35,6 +38,12 @@ public class SetupLocalPlayer : NetworkBehaviour {
 
     private void Start()
     {
+       /* cam = GameObject.Find("Map").transform.Find("Camera").gameObject;
+        camGhost = GameObject.Find("Map").transform.Find("CameraGhost").gameObject;
+
+        cam.SetActive(false);
+        camGhost.SetActive(false);*/
+
         Renderer[] rends = GetComponentsInChildren<Renderer>(); // Se obtienen todos los renders del GameObject
         foreach (Renderer r in rends)//Se recorren todos los renders y se les asigna el color del jugador en cuestion
         {
@@ -46,6 +55,8 @@ public class SetupLocalPlayer : NetworkBehaviour {
             
 
         SetColorString(playerColor);
+
+       // UpdateCamera();
     }
 
 
@@ -63,5 +74,17 @@ public class SetupLocalPlayer : NetworkBehaviour {
             colorString = "Green";
         if (playerColor == Color.yellow)
             colorString = "Yellow";
+        if (playerColor == Color.white)
+            colorString = "White";
+
+
     }
+
+   /* void UpdateCamera()
+    {
+        if (colorString == "White") //Si es el fantasma
+            camGhost.SetActive(true);
+        else
+            cam.SetActive(true);
+    }*/
 }

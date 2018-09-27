@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class Health : NetworkBehaviour {
 
@@ -16,27 +17,29 @@ public class Health : NetworkBehaviour {
     int def = 0;
 
 
-   /* [SyncVar]
-    bool coroutineIsRunning;*/
 
-    // public int vitMAX = 150;
+    [SyncVar]
+    public bool coroutineIsRunning;
 
-    public RectTransform healthBar;
+    public int vitMAX = 100;
+
+    //public RectTransform healthBar;
 
 
 
     void Start () {
         if (!isLocalPlayer)
             return;
-       // CmdSetVITMAX();
+        CmdSetVITMAX();
+       // ghostHealthText = GameObject.Find("Canvas").transform.Find("GhostHealth") as Text;
     }
 	
-   /* [Command]
+    [Command]
     public void CmdSetVITMAX()
     {
         vit = vitMAX;
     }
-    */
+    
 
     [Command]
     public void CmdSetDef(int newDef)
@@ -51,33 +54,40 @@ public class Health : NetworkBehaviour {
 
     public void TakeDamage(int damage)
     {
-        particleHit.Emit(15);
+        if (!isServer) return;
+
+       // particleHit.Emit(15);
         //Este metodo siempre se ejecutara en el lado del servidor (command o con if(isServer))
 
-        int newDamage = damage - def; //Se aplica la defensa adicional del jugador debido a la armadura equipada (si def=0 el damage sera el mismo, en caso de plantas y animales siempre sera asi)
+        //int newDamage = damage - def; //Se aplica la defensa adicional del jugador debido a la armadura equipada (si def=0 el damage sera el mismo, en caso de plantas y animales siempre sera asi)
 
         //Este metodo solo se ejecuta a traves de un Command que envia un jugador con autoridad
-        Debug.Log("Bajando la vida... damage: "+newDamage);
-        vit = vit - newDamage;
-        if (GetComponent<Inventory>() != null) //Solo los jugadores pueden tener inventario y, por tanto, armaduras, en caso contrario se trata de un animal o planta
-        {
-            GetComponent<Inventory>().LosingColorLevelArmor(damage); //Si el jugador que sufre danyo lleva armadura equipada, esta se vera danyada disminuyendo su colorLevel
-        }
+       // Debug.Log("Bajando la vida... damage: "+newDamage);
+        //Debug.Log("Bajando la vida... damage: " + damage);
+        Debug.Log("Bajando la vida...");
 
-        if (healthBar != null) //healthBar NO es null cuando se trata de un jugador
-        {
-            RpcUpdateHealthBar();
-        }
+        vit = vit - damage;
+        GameObject.Find("GameManager").GetComponent<GhostHealth>().UpdateHealthGhost(vit);
+        //ghostHealthText.text = "Ghost: " + vit.ToString();
+        /* if (GetComponent<Inventory>() != null) //Solo los jugadores pueden tener inventario y, por tanto, armaduras, en caso contrario se trata de un animal o planta
+         {
+             GetComponent<Inventory>().LosingColorLevelArmor(damage); //Si el jugador que sufre danyo lleva armadura equipada, esta se vera danyada disminuyendo su colorLevel
+         }
 
-        if (vit <= 0 && healthBar==null) //healthBar es null cuando se trata de cualquier elemento que no sea un jugador
-        {
-            StartCoroutine(Die());
-        }
+         if (healthBar != null) //healthBar NO es null cuando se trata de un jugador
+         {
+             RpcUpdateHealthBar();
+         }
 
-        if (GetComponent<AnimalIA>() != null) //Si se trata de un animal, este entrara en el estado de huida al sufrir danyo
-        {
-            GetComponent<AnimalIA>().SetState("runAway");
-        }
+         if (vit <= 0 && healthBar==null) //healthBar es null cuando se trata de cualquier elemento que no sea un jugador
+         {
+             StartCoroutine(Die());
+         }
+
+         if (GetComponent<AnimalIA>() != null) //Si se trata de un animal, este entrara en el estado de huida al sufrir danyo
+         {
+             GetComponent<AnimalIA>().SetState("runAway");
+         }*/
     }
 
     IEnumerator Die()
@@ -92,14 +102,21 @@ public class Health : NetworkBehaviour {
     void RpcUpdateHealthBar()
     {
         //Debug.Log("Me queda: " + vit + " de vida");
-        healthBar.sizeDelta = new Vector2(vit, healthBar.sizeDelta.y);
+        //healthBar.sizeDelta = new Vector2(vit, healthBar.sizeDelta.y);
     }
 
     [Command]
     public void CmdStartLosingHealth()
     {
-        //coroutineIsRunning = true;
+        coroutineIsRunning = true;
         StartCoroutine(CmdLosingHealth());
+    }
+
+    [Command]
+    public void CmdStopLosingHealth()
+    {
+        coroutineIsRunning = false;
+        StopCoroutine(CmdLosingHealth());
     }
 
     /*public void StopLosingHealth()
@@ -111,20 +128,22 @@ public class Health : NetworkBehaviour {
     {
         for (; ; )
         {
-            if (vit > 0 && GetComponent<ColorLevel>().GetColorLevel()<=0)
+            if (vit > 0)
             {
                 vit = vit - 1;
-                RpcUpdateHealthBar();
+                //RpcUpdateHealthBar();
+                GameObject.Find("GameManager").GetComponent<GhostHealth>().UpdateHealthGhost(vit);
             }
             else
             {
-                RpcUpdateHealthBar();
+                //RpcUpdateHealthBar();
+                GameObject.Find("GameManager").GetComponent<GhostHealth>().UpdateHealthGhost(vit);
                 StopCoroutine(CmdLosingHealth());
                 print("Stopped " + Time.time);
                 //coroutineIsRunning = false;
 
-                if(GetComponent<ColorLevel>().GetColorLevel()>0)
-                    GetComponent<ColorLevel>().CmdStartCoroutine();
+               /* if(GetComponent<ColorLevel>().GetColorLevel()>0)
+                    GetComponent<ColorLevel>().CmdStartCoroutine();*/
 
                 break;
             }

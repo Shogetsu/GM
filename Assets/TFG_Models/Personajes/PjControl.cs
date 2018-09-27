@@ -11,6 +11,7 @@ public class PjControl : NetworkBehaviour
     public float rotationSpeed = 100.0f;
 
     public float speed;
+    public float normalSpeed;
     // public Rigidbody RB;
     public float jumpForce;
     public CharacterController controller;
@@ -19,6 +20,8 @@ public class PjControl : NetworkBehaviour
     public bool isGrounded = true;
     //public ThirdPersonCamera _thirdPCam;
     public float gravityScale;
+
+    GameObject cam;
 
     public Transform pivot;
 
@@ -29,14 +32,26 @@ public class PjControl : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        if (!isLocalPlayer) //Si no se trata del jugador, se desactivan gameObject del resto de jugadores
+        if (!isLocalPlayer) //Si no se trata del jugador... return
         {
-            transform.GetChild(0).gameObject.SetActive(false); //camara
+           // transform.GetChild(0).gameObject.SetActive(false); //camara
+
             return;
         }
 
-      /*  if (isServer)
-            gameOver = false;*/
+        if (isServer) // host runs
+        {
+            Debug.Log("JUGADOR 1 AL ATAQUE");
+        }
+        else if (isClient) // client runs
+        {
+            Debug.Log("JUGADOR 2 AL ATAQUE");
+        }
+       
+
+
+        /*  if (isServer)
+              gameOver = false;*/
 
         //RB = GetComponent<Rigidbody>();
         //controller = GetComponent<CharacterController>();
@@ -48,7 +63,7 @@ public class PjControl : NetworkBehaviour
 
         //audioManager
         audioManager = AudioManager.instance;
-
+        normalSpeed = speed;
     }
 
     // Update is called once per frame
@@ -71,7 +86,24 @@ public class PjControl : NetworkBehaviour
 
         // isGrounded = CheckGround();
 
+        while (cam == null)
+        {
+            Debug.Log(GetComponent<SetupLocalPlayer>().colorString);
 
+            if ((GetComponent<SetupLocalPlayer>().colorString != ""))
+            {
+                if (GetComponent<SetupLocalPlayer>().colorString == "White")
+                {
+                    cam = transform.Find("CameraGhost").gameObject;
+                    cam.SetActive(true);
+                }
+                else
+                {
+                    cam = transform.Find("Camera").gameObject;
+                    cam.SetActive(true);
+                }
+            }
+        }
 
 
         /* if (_thirdPCam.target != transform.GetChild(0)) //Se obtiene la posicion del gameobject target dentro del body del modelo
@@ -118,35 +150,54 @@ public class PjControl : NetworkBehaviour
         /* moveDirection = (transform.forward * translation) + (transform.right * rotation);
          moveDirection = moveDirection.normalized * speed;*/
 
-      /*  if (isGrounded)
+        /*  if (isGrounded)
         {*/
-            moveDirection.y = 0f;
-            if (Input.GetButtonDown("Jump")) //La tecla "espacio" es por defecto Jump
+        moveDirection.y = 0f;
+       /* if (Input.GetButtonDown("Jump")) //La tecla "espacio" es por defecto Jump
+        {
+            // RB.velocity = new Vector3(RB.velocity.x, jumpForce, RB.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+            // moveDirection.y = jumpForce;
+            GetComponent<NetworkAnimator>().SetTrigger("isJumping");
+            audioManager.PlaySound("Jump");
+
+            if (isServer) //El host ejecuta las animaciones Trigger 2 veces, esto lo soluciona
             {
-                // RB.velocity = new Vector3(RB.velocity.x, jumpForce, RB.velocity.z);
-                rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-                // moveDirection.y = jumpForce;
-                GetComponent<NetworkAnimator>().SetTrigger("isJumping");
-                audioManager.PlaySound("Jump");
-
-                if (isServer) //El host ejecuta las animaciones Trigger 2 veces, esto lo soluciona
-                {
-                    GetComponent<NetworkAnimator>().animator.ResetTrigger("isJumping");
-                }
-
-                //  anim.SetTrigger("isJumping");
+                GetComponent<NetworkAnimator>().animator.ResetTrigger("isJumping");
             }
 
-            if (Input.GetMouseButtonDown(0) && Input.GetButton("ShowMouse") == false)
-            {
-                //El jugador golpea si presiona clic izquierdo y el raton no se esta mostrando en pantalla
-                GetComponent<NetworkAnimator>().SetTrigger("isHitting");
+            //  anim.SetTrigger("isJumping");
+        }*/
+        
 
-                if (isServer) //El host ejecuta las animaciones Trigger 2 veces, esto lo soluciona
-                {
-                    GetComponent<NetworkAnimator>().animator.ResetTrigger("isHitting");
-                }
+        if (Input.GetMouseButton(0) && GetComponent<SetupLocalPlayer>().colorString != "White")
+        {
+            GetComponent<ActiveLantern>().CmdActiveLantern(true);
+            speed = normalSpeed / 2;
+            CmdUpdateAnimSpeed(0.5f);
+            //this.gameObject.GetComponent<NetworkAnimator>().animator.speed = 0.5f;
+            /* 
+            //(Input.GetMouseButtonDown(0) && Input.GetButton("ShowMouse") == false
+
+
+            //El jugador golpea si presiona clic izquierdo y el raton no se esta mostrando en pantalla
+            GetComponent<NetworkAnimator>().SetTrigger("isHitting");
+
+            if (isServer) //El host ejecuta las animaciones Trigger 2 veces, esto lo soluciona
+            {
+                GetComponent<NetworkAnimator>().animator.ResetTrigger("isHitting");
             }
+
+            */
+        }
+
+        else if (Input.GetMouseButton(0) == false)
+        {
+           GetComponent<ActiveLantern>().CmdActiveLantern(false);
+           speed = normalSpeed;
+           CmdUpdateAnimSpeed(1);
+           //this.gameObject.GetComponent<NetworkAnimator>().animator.speed = 1;
+        }
         //}
 
         /*  if (Input.GetButtonDown("Jump")) //La tecla "espacio" es por defecto JUMP
@@ -156,7 +207,9 @@ public class PjControl : NetworkBehaviour
               anim.SetTrigger("isJumping");
           }*/
 
-        if (GetComponent<Health>().GetVit() <= 0 && GameObject.Find("GameManager").GetComponent<DayNightCycle>().gameOver == false)
+        if (GetComponent<Health>().GetVit() <= 0 
+            //&& GameObject.Find("GameManager").GetComponent<DayNightCycle>().gameOver == false
+            )
         {
             anim.SetBool("isDead", true);
 
@@ -198,18 +251,25 @@ public class PjControl : NetworkBehaviour
         //Mover al jugador en diferentes direcciones basadas en la direccion de la camara
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) // !=0 ---> si esta siendo pulsada la tecla
         {
-            transform.rotation = Quaternion.Euler(0f, pivot.rotation.eulerAngles.y, 0f);
+           // transform.rotation = Quaternion.Euler(0f, pivot.rotation.eulerAngles.y, 0f);
             Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
             //slerp rotacion suave
             playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
         }
     }
 
+
+    [Command]
+    void CmdUpdateAnimSpeed(float sp)
+    {
+
+    }
+
     [Command]
     void CmdGameOver()
     {
-        GameObject.Find("GameManager").GetComponent<DayNightCycle>().gameOver = true;
-        RpcGameOver();
+       /* GameObject.Find("GameManager").GetComponent<DayNightCycle>().gameOver = true;
+        RpcGameOver();*/
     }
 
     [ClientRpc]
@@ -298,9 +358,32 @@ public class PjControl : NetworkBehaviour
          {
              isGrounded = true;
          }
-     }
+    }
 
-     void OnCollisionExit(Collision collision)
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Lantern") &&
+            GetComponent<SetupLocalPlayer>().colorString == "White")
+        {
+            Debug.Log("Lantern attack");
+            //GetComponent<Health>().TakeDamage(5);
+
+            if(GetComponent<Health>().coroutineIsRunning==false)
+                GetComponent<Health>().CmdStartLosingHealth();
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Lantern") &&
+            GetComponent<SetupLocalPlayer>().colorString == "White")
+        {
+            if (GetComponent<Health>().coroutineIsRunning == true)
+                GetComponent<Health>().CmdStopLosingHealth();
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
      {
         // Debug.Log("Exited");
          if (collision.gameObject.CompareTag("ground"))
