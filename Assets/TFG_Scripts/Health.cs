@@ -16,12 +16,15 @@ public class Health : NetworkBehaviour {
     [SyncVar]
     int def = 0;
 
-
-
     [SyncVar]
     public bool coroutineIsRunning;
 
     public int vitMAX = 100;
+
+    Coroutine coLosingHealth;
+
+    [SyncVar]
+    bool triggeredLantern;
 
     //public RectTransform healthBar;
 
@@ -31,7 +34,9 @@ public class Health : NetworkBehaviour {
         if (!isLocalPlayer)
             return;
         CmdSetVITMAX();
-       // ghostHealthText = GameObject.Find("Canvas").transform.Find("GhostHealth") as Text;
+        // ghostHealthText = GameObject.Find("Canvas").transform.Find("GhostHealth") as Text;
+        if (isServer)
+            triggeredLantern = false;
     }
 	
     [Command]
@@ -109,14 +114,14 @@ public class Health : NetworkBehaviour {
     public void CmdStartLosingHealth()
     {
         coroutineIsRunning = true;
-        StartCoroutine(CmdLosingHealth());
+        coLosingHealth= StartCoroutine(CmdLosingHealth());
     }
 
     [Command]
     public void CmdStopLosingHealth()
     {
         coroutineIsRunning = false;
-        StopCoroutine(CmdLosingHealth());
+        StopCoroutine(coLosingHealth);
     }
 
     /*public void StopLosingHealth()
@@ -163,4 +168,92 @@ public class Health : NetworkBehaviour {
         return coroutineIsRunning;
     }
     */
+
+    /*void OnTriggerStay(Collider other)
+    {
+        // tagTrigger = other.tag;
+        if (other.gameObject.CompareTag("Lantern") &&
+            GetComponent<SetupLocalPlayer>().colorString == "White")
+        {
+            if (GetComponent<Health>().coroutineIsRunning == false)
+            {
+                GetComponent<Health>().CmdStartLosingHealth();
+                Debug.Log("Start losing health...");
+                triggeredLantern = true;
+            }
+        }
+    }*/
+
+    /*void OnTriggerEnter(Collider other)
+    {
+        // tagTrigger = other.tag;
+
+        if (other.gameObject.CompareTag("Lantern") &&
+            GetComponent<SetupLocalPlayer>().colorString == "White")
+        {
+            triggeredLantern = true;
+            Debug.Log(triggeredLantern);
+
+            if (GetComponent<Health>().coroutineIsRunning == false)
+            {
+                GetComponent<Health>().CmdStartLosingHealth();
+                Debug.Log("Start losing health...");
+            }
+        }
+    }*/
+
+    void OnTriggerStay(Collider other)
+    {
+        // tagTrigger = other.tag;
+
+        if (other.gameObject.CompareTag("Lantern") &&
+            GetComponent<SetupLocalPlayer>().colorString == "White")
+        {
+            triggeredLantern = true;
+            //Debug.Log("Trig: "+triggeredLantern);
+
+            if (GetComponent<Health>().coroutineIsRunning == false)
+            {
+                GetComponent<Health>().CmdStartLosingHealth();
+                Debug.Log("Start losing health...");
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        // tagTrigger = other.tag;
+        if (other.gameObject.CompareTag("Lantern") &&
+            GetComponent<SetupLocalPlayer>().colorString == "White")
+        {
+            //Si se estaba ejecutando alguna corutina pero ya no hay ningun trigger ejecutandose... se detiene la corutina
+            if (GetComponent<Health>().coroutineIsRunning == true && triggeredLantern == false)
+            {
+                GetComponent<Health>().CmdStopLosingHealth();
+                Debug.Log("STOP losing health...");
+            }
+        }
+    }
+
+    void Update()
+    {
+        if (isServer)
+            triggeredLantern = false;
+
+        //Debug.Log("Fix: "+triggeredLantern);
+
+        /*  if (!triggeredLantern)
+          {
+              if (GetComponent<SetupLocalPlayer>().colorString == "White")
+              {
+                  if (GetComponent<Health>().coroutineIsRunning == true)
+                  {
+                      GetComponent<Health>().CmdStopLosingHealth();
+                      Debug.Log("Stop losing health...");
+                  }
+              }
+          }*/
+    }
+
+
 }

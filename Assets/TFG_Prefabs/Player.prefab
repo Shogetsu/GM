@@ -155,7 +155,6 @@ GameObject:
   - component: {fileID: 114462423689142464}
   - component: {fileID: 114458962830121374}
   - component: {fileID: 114717835971684600}
-  - component: {fileID: 114375148356339848}
   - component: {fileID: 114144604846743034}
   - component: {fileID: 114870002984304270}
   - component: {fileID: 114193274099769092}
@@ -235,7 +234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1423707399865076
 GameObject:
   m_ObjectHideFlags: 1
@@ -268,7 +267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1498488800451972
 GameObject:
   m_ObjectHideFlags: 1
@@ -473,7 +472,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1712708657638926
 GameObject:
   m_ObjectHideFlags: 1
@@ -810,7 +809,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229154644669544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.48376313, y: -6.615451, z: 4.5012474}
+  m_LocalPosition: {x: 8.394643, y: -4.6095314, z: -0.6528797}
   m_LocalScale: {x: 0.36, y: 0.36, z: 0.36}
   m_Children:
   - {fileID: 4365823848006346}
@@ -1620,7 +1619,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1067798361322592}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -1802,7 +1801,7 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1063528860387142}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 0.75470376, a: 1}
@@ -1973,6 +1972,7 @@ MonoBehaviour:
   particleHit: {fileID: 0}
   vit: 150
   def: 0
+  coroutineIsRunning: 0
   vitMAX: 100
 --- !u!114 &114193274099769092
 MonoBehaviour:
@@ -2044,25 +2044,13 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: playername
---- !u!114 &114375148356339848
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1229154644669544}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acd6cc01449810944a8fa935f38aa558, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
 --- !u!114 &114376529143068764
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229154644669544}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 491b28896b07f394c84ca3c6ef574bf6, type: 3}
   m_Name: 

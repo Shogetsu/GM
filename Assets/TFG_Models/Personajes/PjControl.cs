@@ -29,6 +29,8 @@ public class PjControl : NetworkBehaviour
 
     CursorLockMode wantedMode;
 
+    bool triggeredLantern = false;
+
     // Use this for initialization
     void Start()
     {
@@ -47,7 +49,6 @@ public class PjControl : NetworkBehaviour
         {
             Debug.Log("JUGADOR 2 AL ATAQUE");
         }
-       
 
 
         /*  if (isServer)
@@ -360,28 +361,35 @@ public class PjControl : NetworkBehaviour
          }
     }
 
-    void OnTriggerEnter(Collider other)
+    /*void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Lantern") &&
             GetComponent<SetupLocalPlayer>().colorString == "White")
         {
-            Debug.Log("Lantern attack");
-            //GetComponent<Health>().TakeDamage(5);
-
-            if(GetComponent<Health>().coroutineIsRunning==false)
+            if (GetComponent<Health>().coroutineIsRunning == false)
+            {
                 GetComponent<Health>().CmdStartLosingHealth();
+                Debug.Log("Start losing health...");
+                
+                
+            }
         }
-    }
+    }*/
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Lantern") &&
-            GetComponent<SetupLocalPlayer>().colorString == "White")
-        {
-            if (GetComponent<Health>().coroutineIsRunning == true)
-                GetComponent<Health>().CmdStopLosingHealth();
-        }
-    }
+
+
+    /* void OnTriggerExit(Collider other)
+     {
+         if (other.gameObject.CompareTag("Lantern") &&
+             GetComponent<SetupLocalPlayer>().colorString == "White")
+         {
+             if (GetComponent<Health>().coroutineIsRunning == true)
+             {
+                 GetComponent<Health>().CmdStopLosingHealth();
+                 Debug.Log("Stop losing health...");
+             }
+         }
+     }*/
 
     void OnCollisionExit(Collision collision)
      {
