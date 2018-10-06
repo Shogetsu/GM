@@ -2423,6 +2423,50 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 4209afd0e9212fa4fbc8b2e73be81e5f, type: 2}
+--- !u!114 &477853432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 477853429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93f2607ecb5e01b429f6159e3fa0aefb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coroutineIsRunning: 0
+--- !u!114 &477853433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 477853429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 168
+    i1: 95
+    i2: 187
+    i3: 178
+    i4: 80
+    i5: 64
+    i6: 73
+    i7: 68
+    i8: 57
+    i9: 229
+    i10: 27
+    i11: 195
+    i12: 218
+    i13: 143
+    i14: 211
+    i15: 110
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!1 &567647301
 GameObject:
   m_ObjectHideFlags: 0

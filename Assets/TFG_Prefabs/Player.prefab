@@ -38,6 +38,8 @@ GameObject:
   - component: {fileID: 33663936102917280}
   - component: {fileID: 23870179113569878}
   - component: {fileID: 64559381728406936}
+  - component: {fileID: 114914631491059688}
+  - component: {fileID: 114092938863713558}
   m_Layer: 0
   m_Name: Cone
   m_TagString: Lantern
@@ -809,7 +811,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229154644669544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.394643, y: -4.6095314, z: -0.6528797}
+  m_LocalPosition: {x: -1.0611396, y: -6.13961, z: -2.3504205}
   m_LocalScale: {x: 0.36, y: 0.36, z: 0.36}
   m_Children:
   - {fileID: 4365823848006346}
@@ -1405,7 +1407,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294966271
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1907,6 +1909,38 @@ MonoBehaviour:
   edgesColor: {r: 0, g: 0.691, b: 0.5194414, a: 1}
   edgeDetectShader: {fileID: 4800000, guid: 3783e82e18d57d345b6e889272f108ac, type: 3}
   edgeDetectMaterial: {fileID: 0}
+--- !u!114 &114092938863713558
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1067798361322592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 13
+    i1: 44
+    i2: 150
+    i3: 146
+    i4: 97
+    i5: 178
+    i6: 3
+    i7: 132
+    i8: 58
+    i9: 160
+    i10: 54
+    i11: 136
+    i12: 122
+    i13: 93
+    i14: 101
+    i15: 170
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114097300170601822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2055,6 +2089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 491b28896b07f394c84ca3c6ef574bf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coroutineIsRunning: 0
 --- !u!114 &114409944619060864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2349,6 +2384,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: 
   playerNameText: {fileID: 114373862233288958}
+--- !u!114 &114914631491059688
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1067798361322592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93f2607ecb5e01b429f6159e3fa0aefb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coroutineIsRunning: 0
 --- !u!124 &124587187314553610
 Behaviour:
   m_ObjectHideFlags: 1

@@ -26,8 +26,9 @@ public class GhostHealth : NetworkBehaviour
         RpcUpdateHealth(vit);
     }
 
+
     [ClientRpc]
-    void RpcUpdateHealth(int vit)
+    public void RpcUpdateHealth(int vit)
     {
         HealthText.text = "Ghost: " + vit.ToString();
     }

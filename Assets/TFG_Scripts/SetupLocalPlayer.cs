@@ -13,6 +13,9 @@ public class SetupLocalPlayer : NetworkBehaviour {
 
     public string colorString;
 
+    [SyncVar]
+    int layerGO;
+
    /* GameObject cam;
     GameObject camGhost;*/
 
@@ -56,6 +59,7 @@ public class SetupLocalPlayer : NetworkBehaviour {
 
         SetColorString(playerColor);
 
+        CmdSetLayerGO();
        // UpdateCamera();
     }
 
@@ -80,11 +84,42 @@ public class SetupLocalPlayer : NetworkBehaviour {
 
     }
 
-   /* void UpdateCamera()
+    [Command]
+    void CmdSetLayerGO()
     {
-        if (colorString == "White") //Si es el fantasma
-            camGhost.SetActive(true);
+        if (colorString == "White")
+            layerGO = 10; //ghost
         else
-            cam.SetActive(true);
-    }*/
+            layerGO = 8; //player
+
+        //this.gameObject.layer = layerGO;
+        RpcUpdateLayerGO();
+    }
+
+    [ClientRpc]
+    void RpcUpdateLayerGO()
+    {
+        Debug.Log("Soy el jugador de color: " + colorString);
+
+        Transform[] children = this.gameObject.GetComponentsInChildren<Transform>();
+        foreach (Transform go in children)
+        {
+            go.gameObject.layer = layerGO;
+        }
+    }
+    /* void UpdateCamera()
+     {
+         if (colorString == "White") //Si es el fantasma
+             camGhost.SetActive(true);
+         else
+             cam.SetActive(true);
+     }*/
+
+    public GameObject GetGameObjectGhost()
+    {
+        if (colorString == "White")
+            return this.gameObject;
+        else
+            return null;
+    }
 }
