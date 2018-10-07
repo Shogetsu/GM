@@ -11,10 +11,11 @@ public class SetupLocalPlayer : NetworkBehaviour {
     [SyncVar]
     public Color playerColor;
 
+    [SyncVar]
     public string colorString;
 
     [SyncVar]
-    int layerGO;
+    public int layerGO;
 
    /* GameObject cam;
     GameObject camGhost;*/
@@ -36,17 +37,10 @@ public class SetupLocalPlayer : NetworkBehaviour {
     void CmdChangeName(string newName)
     {
         pname = newName;
-        //this.GetComponentsInChildren<TextMesh>()
     }
 
     private void Start()
     {
-       /* cam = GameObject.Find("Map").transform.Find("Camera").gameObject;
-        camGhost = GameObject.Find("Map").transform.Find("CameraGhost").gameObject;
-
-        cam.SetActive(false);
-        camGhost.SetActive(false);*/
-
         Renderer[] rends = GetComponentsInChildren<Renderer>(); // Se obtienen todos los renders del GameObject
         foreach (Renderer r in rends)//Se recorren todos los renders y se les asigna el color del jugador en cuestion
         {
@@ -55,16 +49,13 @@ public class SetupLocalPlayer : NetworkBehaviour {
                 r.material.color = playerColor;
             }
         }
-            
 
-        SetColorString(playerColor);
-
-        CmdSetLayerGO();
-       // UpdateCamera();
+        CmdSetColorString(playerColor);
     }
 
 
-    void SetColorString(Color playerColor)
+    [Command]
+    void CmdSetColorString(Color playerColor)
     {
         if (playerColor == Color.magenta)
             colorString = "Magenta";
@@ -80,46 +71,5 @@ public class SetupLocalPlayer : NetworkBehaviour {
             colorString = "Yellow";
         if (playerColor == Color.white)
             colorString = "White";
-
-
-    }
-
-    [Command]
-    void CmdSetLayerGO()
-    {
-        if (colorString == "White")
-            layerGO = 10; //ghost
-        else
-            layerGO = 8; //player
-
-        //this.gameObject.layer = layerGO;
-        RpcUpdateLayerGO();
-    }
-
-    [ClientRpc]
-    void RpcUpdateLayerGO()
-    {
-        Debug.Log("Soy el jugador de color: " + colorString);
-
-        Transform[] children = this.gameObject.GetComponentsInChildren<Transform>();
-        foreach (Transform go in children)
-        {
-            go.gameObject.layer = layerGO;
-        }
-    }
-    /* void UpdateCamera()
-     {
-         if (colorString == "White") //Si es el fantasma
-             camGhost.SetActive(true);
-         else
-             cam.SetActive(true);
-     }*/
-
-    public GameObject GetGameObjectGhost()
-    {
-        if (colorString == "White")
-            return this.gameObject;
-        else
-            return null;
     }
 }

@@ -55,21 +55,6 @@ public class ActiveLantern : NetworkBehaviour {
             5,
             this.gameObject.transform.GetChild(0).gameObject.transform.Find("LanternLight").gameObject.transform.localPosition.z
             );
-
-
-            //this.gameObject.transform.GetChild(0).gameObject.transform.Find("LanternLight").gameObject.transform.Find("Cone").GetComponent<Collider>().enabled = true;
-            //HACER ESTO DE OTRA FORMA: En el Update, SI el fantasma NO tiene activa la corrutina, activar el collider de la linterna otra vez
-
-
-            /*this.gameObject.transform.GetChild(0).gameObject.transform.Find("LanternLight").gameObject.transform.localPosition = Vector3.MoveTowards(
-                this.gameObject.transform.GetChild(0).gameObject.transform.Find("LanternLight").gameObject.transform.localPosition,
-                new Vector3(
-                    this.gameObject.transform.GetChild(0).gameObject.transform.Find("LanternLight").gameObject.transform.localPosition.x,
-                    5,
-                    this.gameObject.transform.GetChild(0).gameObject.transform.Find("LanternLight").gameObject.transform.localPosition.z
-                    ),
-                Time.deltaTime*100
-                );*/
         }
         else
         {
@@ -80,8 +65,6 @@ public class ActiveLantern : NetworkBehaviour {
             );
         }
             
-
-        //this.gameObject.transform.GetChild(0).gameObject.transform.Find("LanternLight").gameObject.SetActive(act);
         this.gameObject.transform.GetChild(0).gameObject.transform.Find("LanternLight").gameObject.transform.Find("Cone").GetComponent<Renderer>().enabled = act;
         this.gameObject.transform.GetChild(0).gameObject.transform.Find("LanternLight").gameObject.transform.Find("Spot light").GetComponent<Light>().enabled = act;
     }
@@ -111,12 +94,14 @@ public class ActiveLantern : NetworkBehaviour {
               Debug.Log("KEEEEEEE");
           }*/
 
-        if (GetGhostGO().GetComponent<Health>().coroutineIsRunning == false)
+        if (GetGhostGO() != null)
         {
-            this.gameObject.transform.GetChild(0).gameObject.transform.Find("LanternLight").gameObject.transform.Find("Cone").GetComponent<Collider>().enabled = true;
-            //Debug.Log("KEEEEEEE");
+            if (GetGhostGO().GetComponent<Health>().coroutineIsRunning == false)
+            {
+                this.gameObject.transform.GetChild(0).gameObject.transform.Find("LanternLight").gameObject.transform.Find("Cone").GetComponent<Collider>().enabled = true;
+                //Debug.Log("KEEEEEEE");
+            }
         }
-
 	}
 
     GameObject GetGhostGO()

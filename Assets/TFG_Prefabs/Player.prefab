@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 114348677648072082}
   - component: {fileID: 114052990953038220}
   - component: {fileID: 114376529143068764}
+  - component: {fileID: 114867612090871280}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -811,7 +812,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229154644669544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0611396, y: -6.13961, z: -2.3504205}
+  m_LocalPosition: {x: 2.3339462, y: -5.1271906, z: -0.60110974}
   m_LocalScale: {x: 0.36, y: 0.36, z: 0.36}
   m_Children:
   - {fileID: 4365823848006346}
@@ -967,7 +968,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1695000869311656}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.009112887, y: 0.37158298, z: 0.24041067}
+  m_LocalPosition: {x: 0.009112887, y: 5, z: 0.24041067}
   m_LocalScale: {x: 0.9769492, y: 0.97694933, z: 1.7727475}
   m_Children:
   - {fileID: 4039088325941900}
@@ -1847,6 +1848,7 @@ MonoBehaviour:
   pname: player
   playerColor: {r: 1, g: 1, b: 1, a: 1}
   colorString: 
+  layerGO: 0
 --- !u!114 &114048305134922966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2371,6 +2373,18 @@ MonoBehaviour:
   outlineShaderMaterial: {fileID: 0}
   renderTexture: {fileID: 0}
   extraRenderTexture: {fileID: 0}
+--- !u!114 &114867612090871280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1229154644669544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085cfd38912b76c40af1688c456489fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerGO: 0
 --- !u!114 &114870002984304270
 MonoBehaviour:
   m_ObjectHideFlags: 1

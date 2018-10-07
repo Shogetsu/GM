@@ -33,4 +33,27 @@ public class GhostHealth : NetworkBehaviour
         HealthText.text = "Ghost: " + vit.ToString();
     }
 
+   /* [ClientRpc]
+    public void RpcChangeLayerGhost()
+    {
+        Transform[] children = this.gameObject.GetComponentsInChildren<Transform>();
+        foreach (Transform go in children)
+        {
+            go.gameObject.layer = 10;
+        }
+    }
+
+    GameObject GetGhostGO()
+    {
+        GameObject go = null;
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Player").Length; i++)
+        {
+            if (GameObject.FindGameObjectsWithTag("Player")[i].GetComponent<SetupLocalPlayer>().colorString == "White")
+            {
+                go = GameObject.FindGameObjectsWithTag("Player")[i];
+                break;
+            }
+        }
+        return go;
+    }*/
 }
